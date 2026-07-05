@@ -3,10 +3,12 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AnalyticsController;
 use App\Http\Controllers\Api\ChatbotController;
+use App\Http\Controllers\Api\N8nWebhookController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StoreController;
 use App\Http\Controllers\Api\SupplierSettingsController;
+use App\Http\Middleware\VerifyN8nWebhookSecret;
 use App\Http\Middleware\EnsureUserIsSupplier;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,8 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::post('chatbot/test-order', [ChatbotController::class, 'store']);
+Route::post('webhooks/n8n/whatsapp-inbound', [N8nWebhookController::class, 'whatsappInbound'])
+    ->middleware(VerifyN8nWebhookSecret::class);
 Route::post('stores', [StoreController::class, 'store']);
 
 Route::middleware(['auth:sanctum', EnsureUserIsSupplier::class])->group(function () {

@@ -40,4 +40,10 @@ return [
         'model' => env('OPENAI_MODEL', 'gpt-4.1-mini'),
     ],
 
+    'n8n' => [
+        'webhook_secret' => env('N8N_WEBHOOK_SECRET'),
+        'base_url' => env('N8N_BASE_URL'),
+        'ai_agent_path' => env('N8N_AI_AGENT_PATH', '/webhook/ai-agent'),
+    ],
+
 ];
