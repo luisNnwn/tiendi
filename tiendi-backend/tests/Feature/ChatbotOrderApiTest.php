@@ -26,8 +26,6 @@ beforeEach(function () {
         'active' => true,
     ]);
 
-    $this->supplier->stores()->attach($this->store->id, ['active' => true]);
-
     $this->coca = Product::query()->create([
         'supplier_id' => $this->supplier->id,
         'name' => 'Coca Cola 2L',
@@ -120,8 +118,6 @@ test('chatbot endpoint splits order by multiple suppliers', function () {
         'name' => 'Snacks SV',
         'active' => true,
     ]);
-
-    $this->store->suppliers()->attach($otherSupplier->id, ['active' => true]);
 
     $oreo = Product::query()->create([
         'supplier_id' => $otherSupplier->id,

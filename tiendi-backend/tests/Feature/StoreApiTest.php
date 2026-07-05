@@ -37,11 +37,6 @@ test('supplier can register store with local el salvador phone number', function
         'name' => 'Abarrotes La Esquina',
         'phone_number' => '50371234567',
     ]);
-
-    $this->assertDatabaseHas('store_supplier', [
-        'supplier_id' => $supplier->id,
-        'store_id' => $create->json('data.id'),
-    ]);
 });
 
 test('supplier can update and deactivate stores', function () {
@@ -53,8 +48,6 @@ test('supplier can update and deactivate stores', function () {
         'phone_number' => '50377778888',
         'active' => true,
     ]);
-
-    $supplier->stores()->attach($store->id, ['active' => true]);
 
     $this->withToken($token)
         ->putJson("/api/stores/{$store->id}", [

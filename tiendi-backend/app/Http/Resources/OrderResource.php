@@ -18,6 +18,7 @@ class OrderResource extends JsonResource
             'store_id' => $this->store_id,
             'supplier_id' => $this->supplier_id,
             'status' => $this->status,
+            'delivery_date' => $this->delivery_date?->toDateString(),
             'raw_message' => $this->raw_message,
             'total' => $this->total,
             'store' => new StoreResource($this->whenLoaded('store')),

@@ -21,15 +21,6 @@ class OrderValidationService
             $errors[] = 'La tienda está inactiva.';
         }
 
-        $isLinked = $supplier->stores()
-            ->whereKey($store->id)
-            ->wherePivot('active', true)
-            ->exists();
-
-        if (! $isLinked) {
-            $errors[] = 'La tienda no está vinculada a este proveedor.';
-        }
-
         if ($items === []) {
             $errors[] = 'El pedido debe incluir al menos un producto.';
         }

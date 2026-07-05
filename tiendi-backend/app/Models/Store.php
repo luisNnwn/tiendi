@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Store extends Model
@@ -19,13 +18,6 @@ class Store extends Model
         return [
             'active' => 'boolean',
         ];
-    }
-
-    public function suppliers(): BelongsToMany
-    {
-        return $this->belongsToMany(Supplier::class, 'store_supplier')
-            ->withPivot('active')
-            ->withTimestamps();
     }
 
     public function orders(): HasMany

@@ -23,8 +23,14 @@ export default function Layout() {
           <NavLink to="/productos" className={({ isActive }) => (isActive ? 'active' : '')}>
             Productos
           </NavLink>
+          <NavLink to="/pedidos" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Pedidos
+          </NavLink>
           <NavLink to="/tiendas" className={({ isActive }) => (isActive ? 'active' : '')}>
             Tiendas
+          </NavLink>
+          <NavLink to="/analitica" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Analítica
           </NavLink>
         </nav>
 

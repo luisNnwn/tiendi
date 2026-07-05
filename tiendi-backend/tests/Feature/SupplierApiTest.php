@@ -130,3 +130,16 @@ test('supplier cannot access another suppliers product', function () {
         ->getJson("/api/products/{$product->id}")
         ->assertNotFound();
 });
+
+test('supplier can update delivery settings', function () {
+    $token = supplierToken($this->user);
+
+    $this->withToken($token)
+        ->putJson('/api/supplier/settings', [
+            'delivery_weekdays' => [1, 3, 5],
+            'lead_time_days' => 2,
+        ])
+        ->assertOk()
+        ->assertJsonPath('data.delivery_weekdays.0', 1)
+        ->assertJsonPath('data.lead_time_days', 2);
+});

@@ -48,14 +48,14 @@ class ChatbotController extends Controller
             ], 404);
         }
 
-        $suppliers = $store->suppliers()
-            ->wherePivot('active', true)
-            ->where('suppliers.active', true)
+        $suppliers = Supplier::query()
+            ->where('active', true)
+            ->whereHas('products', fn ($query) => $query->where('active', true))
             ->get();
 
         if ($suppliers->isEmpty()) {
             return response()->json([
-                'message' => 'La tienda no tiene un proveedor activo vinculado.',
+                'message' => 'No hay proveedores activos con productos disponibles.',
             ], 422);
         }
 
@@ -64,7 +64,7 @@ class ChatbotController extends Controller
 
         if ($candidates->isEmpty()) {
             return response()->json([
-                'message' => 'No encontré productos coincidentes en el catálogo de proveedores vinculados.',
+                'message' => 'No encontré productos coincidentes en el catálogo de proveedores.',
             ], 422);
         }
 

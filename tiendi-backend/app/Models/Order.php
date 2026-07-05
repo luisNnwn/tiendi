@@ -12,6 +12,7 @@ class Order extends Model
         'store_id',
         'supplier_id',
         'status',
+        'delivery_date',
         'raw_message',
         'total',
     ];
@@ -20,6 +21,7 @@ class Order extends Model
     {
         return [
             'total' => 'decimal:2',
+            'delivery_date' => 'date',
         ];
     }
 

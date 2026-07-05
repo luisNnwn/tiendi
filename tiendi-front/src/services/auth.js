@@ -10,6 +10,16 @@ export async function login(email, password) {
   return data
 }
 
+export async function signup(payload) {
+  const data = await apiRequest('/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+
+  setToken(data.token)
+  return data
+}
+
 export async function fetchMe() {
   return apiRequest('/auth/me')
 }

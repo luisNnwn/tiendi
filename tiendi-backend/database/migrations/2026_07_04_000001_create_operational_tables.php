@@ -28,16 +28,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('store_supplier', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('store_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('supplier_id')->constrained()->cascadeOnDelete();
-            $table->boolean('active')->default(true);
-            $table->timestamps();
-
-            $table->unique(['store_id', 'supplier_id']);
-        });
-
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('supplier_id')->constrained()->cascadeOnDelete();
@@ -85,7 +75,6 @@ return new class extends Migration
         Schema::dropIfExists('order_items');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('products');
-        Schema::dropIfExists('store_supplier');
         Schema::dropIfExists('stores');
         Schema::dropIfExists('suppliers');
     }

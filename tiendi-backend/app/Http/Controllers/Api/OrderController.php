@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\UpdateOrderStatusRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\Store;
@@ -73,6 +74,17 @@ class OrderController extends Controller
         $order->load(['store', 'items.product']);
 
         return new OrderResource($order);
+    }
+
+    public function updateStatus(UpdateOrderStatusRequest $request, Order $order): OrderResource
+    {
+        $this->ensureOwnsOrder($request, $order);
+
+        $order->update([
+            'status' => $request->validated('status'),
+        ]);
+
+        return new OrderResource($order->fresh()->load(['store', 'items.product']));
     }
 
     private function ensureOwnsOrder(Request $request, Order $order): void

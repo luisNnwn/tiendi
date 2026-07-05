@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { ApiError } from '../services/api'
 import { useAuth } from '../hooks/useAuth'
 
@@ -77,6 +77,14 @@ export default function LoginPage() {
           <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
             {submitting ? 'Ingresando…' : 'Iniciar sesión'}
           </button>
+
+          <Link className="chatbot-link" to="/signup">
+            ¿No tienes cuenta? Registra tu proveedor
+          </Link>
+
+          <Link className="chatbot-link" to="/registro-tienda">
+            Registrar tienda (público)
+          </Link>
 
           <a className="chatbot-link" href="/chatbot">
             Probar chatbot de pedidos (sin login)

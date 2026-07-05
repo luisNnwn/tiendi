@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Supplier extends Model
@@ -13,6 +12,8 @@ class Supplier extends Model
         'user_id',
         'name',
         'phone_number',
+        'delivery_weekdays',
+        'lead_time_days',
         'active',
     ];
 
@@ -20,6 +21,8 @@ class Supplier extends Model
     {
         return [
             'active' => 'boolean',
+            'delivery_weekdays' => 'array',
+            'lead_time_days' => 'integer',
         ];
     }
 
@@ -31,13 +34,6 @@ class Supplier extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
-    }
-
-    public function stores(): BelongsToMany
-    {
-        return $this->belongsToMany(Store::class, 'store_supplier')
-            ->withPivot('active')
-            ->withTimestamps();
     }
 
     public function orders(): HasMany

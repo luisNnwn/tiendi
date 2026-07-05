@@ -17,6 +17,8 @@ class SupplierResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'phone_number' => $this->phone_number,
+            'delivery_weekdays' => $this->delivery_weekdays ?? [],
+            'lead_time_days' => (int) ($this->lead_time_days ?? 2),
             'active' => $this->active,
         ];
     }
